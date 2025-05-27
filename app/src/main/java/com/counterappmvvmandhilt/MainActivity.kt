@@ -19,19 +19,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.getRoot())
 
-        binding.tvCounter.text = getString(R.string.click_count,mainVewModel.getCount())
+        binding.tvCounter.text = getString(R.string.click_count,mainVewModel.stateFlow.value)
         setAllClickListeners()
     }
 
     private fun setAllClickListeners(){
         binding.btnClickCounter.setOnClickListener {
             mainVewModel.updateCount()
-            binding.tvCounter.text = getString(R.string.click_count,mainVewModel.getCount())
+            binding.tvCounter.text = getString(R.string.click_count,mainVewModel.stateFlow.value)
         }
 
         binding.btnStartService.setOnClickListener {
             val intentService = Intent(this, MyService::class.java)
-            intentService.putExtra(Constants.COUNT,mainVewModel.getCount())
+            intentService.putExtra(Constants.COUNT,mainVewModel.stateFlow.value)
             startService(intentService)
         }
     }
@@ -39,6 +39,6 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         mainVewModel.resetCount()
-        binding.tvCounter.text = getString(R.string.click_count,mainVewModel.getCount())
+        binding.tvCounter.text = getString(R.string.click_count,mainVewModel.stateFlow.value)
     }
 }
