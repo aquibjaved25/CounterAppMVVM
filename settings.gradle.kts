@@ -23,3 +23,4 @@ rootProject.name = "CounterAppMVVMAndHilt"
 include(":app")
 include(":app:assignment2")
 include(":assignment3")
+include(":assignment4")
